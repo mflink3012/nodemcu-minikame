@@ -1,0 +1,5 @@
+#pragma once
+
+// Wifi Access Point configuration
+const char* WIFI_SSID = "my-private-wifi";
+const char* WIFI_PASSWD = "0123456789012345";
