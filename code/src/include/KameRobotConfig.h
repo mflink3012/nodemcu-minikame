@@ -11,6 +11,7 @@ class KameRobotConfig {
         std::vector<int> maxAngle = { 180, 180, 180, 180, 180, 180, 180, 180 };
         std::vector<uint16_t> minUs = { MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH, MIN_PULSE_WIDTH };
         std::vector<uint16_t> maxUs = { MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH, MAX_PULSE_WIDTH };
+        unsigned int stepDuration = 200;
     public:
         enum SERVOS {
             FRONT_LEFT_TURNING_SERVO = 0,
@@ -74,5 +75,9 @@ class KameRobotConfig {
 
         int getMaxAngle(SERVOS servo) {
             return maxAngle[servo];
+        }
+
+        unsigned int getStepDuration() {
+            return stepDuration;
         }
 };

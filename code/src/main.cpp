@@ -183,22 +183,22 @@ void initNetwork() {
     enableWebserver();
 }
 
-long last_milis = 0;
+long lastMillis = 0;
 
 void loop() {
     if (isOTAInitialized) {
         ArduinoOTA.handle();
     }
 
-    long currentMilis = millis();
+    long currentMillis = millis();
 
-    if (currentMilis - last_milis > 200) {
+    if (currentMillis - lastMillis > robotConfig.getStepDuration()) {
         // TODO: Put this into a pattern to let the behaviors decide themself - they know better ;)
         if (robot.getState() == ROBOT_STATES::WALK_FORWARD) {
             behaviors["legs/walk/forward"]->run();
         } else if (robot.getState() == ROBOT_STATES::WALK_BACKWARD) {
             behaviors["legs/walk/backward"]->run();
         }
-        last_milis = millis();
+        lastMillis = millis();
     }
 }
