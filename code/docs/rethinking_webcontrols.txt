@@ -1,0 +1,74 @@
+Better (and more REST) pattern could be:
+"<option>://<resource>/<resource-id>"
+Body (almost):
+"<parameter>=<value>\n
+<parameter>=<value>\n
+..."
+Last dublicate parameter wins!
+
+"get://configuration"
+Will print the configuration. Don't print secrets like the WIFI-passphrase!
+
+"patch://configuration"
+Body:
+"<parameter>=<value>\n
+<parameter>=<value>\n
+..."
+Might be available in future to change specific (changeable!) configuration parameters.
+
+"get://documentation"
+Will print the documentation of the available commands and their usage.
+
+"patch://servos"
+Body:
+"action=enable"
+Will enable all servos
+
+"patch://servos"
+Body:
+"action=disable"
+Will disable all servos
+
+"patch://servos/fll"
+Body:
+"action=enable"
+With fll meaning front-left-lift(-servo), enabling the lifting-servo on the front-left-leg
+
+"patch://servos/flt"
+Body:
+"action=disable"
+with flt meaning front-left-turn(-servo), disabling the turning-servo on the front-left-leg
+
+"patch://servos/frl"
+Body:
+"action=enable"
+
+"patch://servos/frt"
+Body:
+"action=disable"
+
+"patch://servos/fll"
+Body:
+"action=rotate\n
+angle=90"
+Will rotate the front-left-lifting-servo to 90°-position (absolute)
+
+"patch://servos"
+Body:
+"fll090frl120bll010brl030flt000frt045blt045brt090\n
+fll090frl120blt045brt090\n
+flt000"
+Will play a macro line by line changing the specified servo-angles (absolute). All at ones, only some, only one.
+Allows sending patterns to be done without programming them into the robot.
+
+Note: One might come to the idea doing relative actions, but ...
+... this would need an extra parameter type=relative (OK)
+... this would need to save the current position (OK)
+    ... what might lead to problems, because the configuration has to be perfect about maximum angles in all directions (PROBLEMATIC)
+        ... otherwise the values will be increased above the maximum/decreased below the minimum physical possible angle (VERY BAD)
+... this would need to handle signs before the angle-value (OK)
+
+We don't use POST, PUT and DELETE, because we don't create or delete anything yet. Maybe later when saving data to the robot!?
+"delete://configuration" might be used for resetting specific configuration-values to defaults in future.
+"options://" might be available in future to show what options we accept.
+CONNECT, HEAD and TRACE are useless (do not see a valid action for this at the moment)
